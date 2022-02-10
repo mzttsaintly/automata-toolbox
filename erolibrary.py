@@ -6,12 +6,12 @@ import asyncio
 import os
 
 print("输入数据库名字（非根目录下需输入完整路径）")
-msg = input()
+sqlite_host = input()
 print("输入图片文件夹路径（绝对路径）")
-msg2 = input()
-print(f"数据库：{msg}\n文件夹：{msg2}")
-sqlite_host = r"warfarin.db"
-img_path = r"D:/automata-toolbox/test_img"
+img_path = input()
+print(f"数据库：{sqlite_host}\n文件夹：{img_path}")
+# sqlite_host = r"warfarin.db"
+# img_path = r"D:/automata-toolbox/test_img"
 
 
 class AsyncEngine:
@@ -73,6 +73,7 @@ class ImageInformation(Base):
     __tablename__ = "image_information"
     id = Column(Integer, primary_key=True, autoincrement=True)
     img_name = Column(String(32))
+    path_name = Column(String(32))
     character = Column(String(32))
     work_name = Column(String(32))
     tags = Column(String(32))
@@ -82,19 +83,20 @@ class ImageInformation(Base):
 async def Batch_write():
     await engine.create_all()
 
-    async def add_sqlite(table, img_name, character, work_name, tags, ero):
+    async def add_sqlite(table, img_name, path_name, character, work_name, tags, ero):
         print(f"{img_name}")
         # user_obj = table(img_name=img_name, character=character, work_name=work_name,tags=tags,ero=ero)
         # orm.add(table, user_obj)
         await engine.add(table,
                          {"img_name": img_name,
+                          "path_name": path_name,
                           "character": character,
                           "work_name": work_name,
                           "tags": tags,
                           "ero": ero})
 
     for file in os.listdir(img_path):
-        await add_sqlite(ImageInformation, file, "none", "none", "none", 0)
+        await add_sqlite(ImageInformation, file, "ero", "none", "none", "none", 5)
 
 
 if __name__ == "__main__":
