@@ -5,13 +5,14 @@ from sqlalchemy.orm import sessionmaker
 import asyncio
 import os
 
+
 print("输入数据库名字（非根目录下需输入完整路径）")
 sqlite_host = input()
 print("输入图片文件夹路径（绝对路径）")
 img_path = input()
 print(f"数据库：{sqlite_host}\n文件夹：{img_path}")
 # sqlite_host = r"warfarin.db"
-# img_path = r"D:/automata-toolbox/test_img"
+# img_path = r"/test_img"
 
 
 class AsyncEngine:
