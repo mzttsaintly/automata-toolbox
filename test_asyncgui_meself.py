@@ -29,7 +29,7 @@ class App(tk.Tk):
         self.db_name = tk.StringVar()
         self.FileDirName = tk.StringVar()  # 文字变量储存
         self.img_png = r"D:\automata-toolbox\test_img\00101.jpg"
-        # self.img_png = f"{self.FileDirName.get() + self.ero_list[0]}"
+        # self.img_png = f"{self.FileDirName.get() + os.listdir(self.FileDirName.get())[1]}"
         self.img_open = Image.open(self.img_png).resize((480, 268))
         self.img_open_pil = ImageTk.PhotoImage(self.img_open)
         self.tasks = []
@@ -51,6 +51,8 @@ class App(tk.Tk):
         engine = AsyncORM(f"sqlite+aiosqlite:///{sqlite_host}")
         Base = engine.Base
         await engine.create_all()
+        self.img_png = f"{self.FileDirName.get() + os.sep + os.listdir(self.FileDirName.get())[1]}"
+        # print(f"{self.img_png}")
 
     async def Batch_write(self):
         await engine.create_all()
@@ -123,7 +125,7 @@ class App(tk.Tk):
         tk.Label(ero_out_frame, text="选择图片：").grid(row=8, column=0)
         combo = ttk.Combobox(ero_out_frame, values=self.ero_list, width=17)
         combo.grid(row=8, column=1)
-        tk.Button(ero_out_frame, text="打开图片", command=lambda: app_loop.create_task(self.get_list())).grid(row=8, column=2)
+        tk.Button(ero_out_frame, text="打开图片", command=self.update_img).grid(row=8, column=2)
         tk.Button(ero_out_frame, text="上一张", width=10).grid(row=9, column=0)
         tk.Button(ero_out_frame, text="下一张", width=10).grid(row=9, column=1)
         tk.Button(ero_out_frame, text="确认修改").grid(row=10, column=1)
@@ -133,12 +135,25 @@ class App(tk.Tk):
         ero_show_frame = tk.Frame(self)
         ero_show_frame.pack(side="right")
         tk.Label(ero_show_frame, text="显示所选图片").grid(row=0, column=1)
+        global ero_show
         # global img_png
         # img_png = r"D:\automata-toolbox\test_img\00101.jpg"
         # img_open = Image.open(self.img_png).resize((480, 268))
         # img_open_pil = ImageTk.PhotoImage(img_open)
+        # self.img_open = Image.open(self.img_png).resize((480, 268))
+        # self.img_open_pil = ImageTk.PhotoImage(self.img_open)
         ero_show = tk.Label(ero_show_frame, image=self.img_open_pil)
+        print(f"{self.img_png}")
         ero_show.grid(row=1, column=1)
+
+    def update_img(self):
+        # ero_show.configure(image=self.img_open_pil)
+        print(f"{self.img_png}")
+        self.img_open = Image.open(self.img_png).resize((480, 268))
+        self.img_open_pil = ImageTk.PhotoImage(self.img_open)
+        ero_show.config(image=self.img_open_pil)
+        ero_show.image = self.img_open_pil
+        self.update_idletasks()
 
     async def get_list(self):
         pass
