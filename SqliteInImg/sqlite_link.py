@@ -1,5 +1,6 @@
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.sql.expression import select, and_
 from sqlalchemy.orm import sessionmaker
 
 sqlite_host = r"D:/automata-toolbox/warfarin.db"
@@ -21,6 +22,20 @@ class AsyncEngine:
             except Exception as e:
                 await session.rollback()
                 raise e
+
+
+async def search_sqlite_in_table_by_where(table_and_column, search_equation):
+    """
+    从表中搜索符合条件的数据
+    table_and_column: 表名和表内的项目名，可填多个(Setu.Group_id, Setu.user_id, Setu.time etc.)
+    search_equation: 搜索的条件,填写关系式，如(Setu.time > f"{datetime.date.now()}")
+                     若需要填写多个关系式请用and_()连接；如and_(Setu.time > f"{datetime.date.today()}",
+                                                       Setu.Group_id == f"{group_id}")
+    """
+    # today = datetime.date.today()
+    # tomorrow = datetime.date.today() + datetime.timedelta(days=1)
+    res = await engine.load_all(select(table_and_column).where(search_equation))
+    return res
 
 
 class AsyncORM(AsyncEngine):
