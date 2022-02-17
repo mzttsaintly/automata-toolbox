@@ -122,7 +122,8 @@ class AsyncORM(AsyncEngine):
         """
         # today = datetime.date.today()
         # tomorrow = datetime.date.today() + datetime.timedelta(days=1)
-        res = await self.engine.load_all(select(table_and_column).where(search_equation))
+        # res = await self.engine.load_all(select(table_and_column).where(search_equation))
+        res = (await self.execute(select(table_and_column).where(search_equation))).fetchall()
         return res
 
 
