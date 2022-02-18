@@ -3,13 +3,15 @@ import os
 import tkinter as tk
 from tkinter import ttk
 from PIL import Image, ImageTk
+from typing import List, Tuple
+
 from EroLibrary.erolibrary import AsyncEngine, AsyncORM
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.sql.expression import select, and_
 from sqlalchemy.ext.declarative import declarative_base
 
 
-async def get_info(where) -> list[tuple[int, str, str, str, str, str, str, int]]:
+async def get_info(where):
     """
     where: 需要检索的条件，填写关系式，如(Setu.time > f"{datetime.date.now()}")
                      若需要填写多个关系式请用and_()连接；如and_(Setu.time > f"{datetime.date.today()}",
@@ -61,7 +63,7 @@ class App(tk.Tk):
         self.db_name = tk.StringVar()
         self.FileDirName = tk.StringVar()  # 文字变量储存
         # self.img_png = r"D:\automata-toolbox\test_img\00101.jpg"
-        self.img_png = f"{os.path.join(os.getcwd(), 'test_img', os.listdir(os.path.join(os.getcwd(), 'test_img'))[0])}"
+        self.img_png = f"{os.path.join(os.getcwd(), 'res', os.listdir(os.path.join(os.getcwd(), 'res'))[0])}"
         self.img_open = Image.open(self.img_png).resize((480, 268))
         self.img_open_pil = ImageTk.PhotoImage(self.img_open)
         self.tasks = []
@@ -105,7 +107,7 @@ class App(tk.Tk):
             print(f"{img_name}")
             # user_obj = table(img_name=img_name, character=character, work_name=work_name,tags=tags,ero=ero)
             # orm.add(table, user_obj)
-            await engine.insert_or_update(table, ([ImageInformation.img_name == f"{img_name}"]),
+            await engine.insert_or_ignore(table, ([ImageInformation.img_name == f"{img_name}"]),
                                           {"img_name": img_name,
                                            "path_name": path_name,
                                            "character": character,
@@ -177,7 +179,7 @@ class App(tk.Tk):
     async def gui_show(self, app_loop):
         # ero_show_frame 显示所选图片
         ero_show_frame = tk.Frame(self)
-        ero_show_frame.pack(side="right")
+        ero_show_frame.pack(side="left")
         tk.Label(ero_show_frame, text="显示所选图片").grid(row=0, column=1)
         global ero_show
         # global img_png
@@ -223,7 +225,9 @@ class App(tk.Tk):
         ero_out_ero.config(textvariable=self.ero_ero)
         # 刷新图片
         self.img_png = f"{os.path.join(self.FileDirName.get(), self.ero_img_name.get())}"
-        self.img_open = Image.open(self.img_png).resize((480, 268))
+        self.img_open = Image.open(self.img_png)
+        width, height = self.img_open.size
+        self.img_open = self.img_open.resize((int(width / 4), int(height / 4)))
         self.img_open_pil = ImageTk.PhotoImage(self.img_open)
         ero_show.config(image=self.img_open_pil)
         ero_show.image = self.img_open_pil
@@ -246,10 +250,11 @@ class App(tk.Tk):
             tags = Column(String(32))
             ero = Column(Integer)
 
-        if self.ero_id >= 10:
-            res = await get_info(and_(ImageInformation.id > (self.ero_id - 10), ImageInformation.id < self.ero_id + 10))
-        else:
-            res = await get_info(and_(ImageInformation.id > 0, ImageInformation.id < self.ero_id + 10))
+        res = await get_info(ImageInformation.id > 0)
+        # if self.ero_id >= 100:
+        #     res = await get_info(and_(ImageInformation.id > (self.ero_id - 100), ImageInformation.id < self.ero_id + 100))
+        # else:
+        #     res = await get_info(and_(ImageInformation.id > 0, ImageInformation.id < self.ero_id + 100))
         ans = [str]
         for i in range(len(res)):
             ans.append(res[i][1])
