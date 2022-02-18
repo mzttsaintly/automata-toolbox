@@ -56,7 +56,7 @@ class AsyncEngine:
 class AsyncORM(AsyncEngine):
     def __init__(self, conn):
         super().__init__(conn)
-        print(f"{conn}")
+        # print(f"{conn}")
         self.session = AsyncSession(bind=self.engine)
         self.Base = declarative_base(self.engine)
         self.async_session = sessionmaker(self.engine, expire_on_commit=False, class_=AsyncSession)
@@ -65,7 +65,7 @@ class AsyncORM(AsyncEngine):
         """创建所有表"""
         async with self.engine.begin() as conn:
             await conn.run_sync(self.Base.metadata.create_all)
-        print("创建连接")
+        # print("连接到表中")
 
     async def drop_all(self):
         """删除所有表"""
@@ -124,6 +124,12 @@ class AsyncORM(AsyncEngine):
         # tomorrow = datetime.date.today() + datetime.timedelta(days=1)
         # res = await self.engine.load_all(select(table_and_column).where(search_equation))
         res = (await self.execute(select(table_and_column).where(search_equation))).fetchall()
+        return res
+
+    async def query(self, condition):
+        """获取一个符合条件的数据
+        如：await engine.query(func.max(ImageInformation.id))"""
+        res = (await self.execute(select(condition))).fetchone()
         return res
 
 

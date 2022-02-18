@@ -2,16 +2,40 @@ import asyncio
 import os
 import tkinter as tk
 from tkinter import ttk
-from PIL import Image, ImageTk
 from typing import List, Tuple
 
+from PIL import Image, ImageTk
+from loguru import logger
+
 from EroLibrary.erolibrary import AsyncEngine, AsyncORM
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, func
 from sqlalchemy.sql.expression import select, and_
 from sqlalchemy.ext.declarative import declarative_base
 
+print("输入数据库名字（非根目录下需输入完整路径）")
+sqlite_host = input()
+print("输入图片文件夹路径（绝对路径）")
+img_path = input()
+# print(f"数据库：{sqlite_host}\n文件夹：{img_path}")
+logger.success(f"数据库：{sqlite_host}\n文件夹：{img_path}")
+engine = AsyncORM(f"sqlite+aiosqlite:///{sqlite_host}")
+Base = engine.Base
 
-async def get_info(where):
+
+class ImageInformation(Base):
+    __table_args__ = {'extend_existing': True}
+    __tablename__ = "image_information"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    img_name = Column(String(32))
+    path_name = Column(String(32))
+    character = Column(String(32))
+    title = Column(String(32))
+    hair = Column(String(32))
+    tags = Column(String(32))
+    ero = Column(Integer)
+
+
+async def get_info(where) -> List[Tuple[int, str, str, str, str, str, str, int]]:
     """
     where: 需要检索的条件，填写关系式，如(Setu.time > f"{datetime.date.now()}")
                      若需要填写多个关系式请用and_()连接；如and_(Setu.time > f"{datetime.date.today()}",
@@ -20,26 +44,12 @@ async def get_info(where):
     :return: list[tuple(id: int,img_name: str,path_name: str,character: str ,title: str ,hair: str,tags: str,
     ero: int)]
     """
-
-    class ImageInformation(Base):
-        __table_args__ = {'extend_existing': True}
-        __tablename__ = "image_information"
-        id = Column(Integer, primary_key=True, autoincrement=True)
-        img_name = Column(String(32))
-        path_name = Column(String(32))
-        character = Column(String(32))
-        title = Column(String(32))
-        hair = Column(String(32))
-        tags = Column(String(32))
-        ero = Column(Integer)
-
     await engine.create_all()
     res = await engine.search_sqlite_in_table_by_where((ImageInformation.id, ImageInformation.img_name,
                                                         ImageInformation.path_name, ImageInformation.character,
                                                         ImageInformation.title, ImageInformation.hair,
                                                         ImageInformation.tags, ImageInformation.ero), where)
     return res
-    # print(str(res))
 
 
 class App(tk.Tk):
@@ -50,7 +60,7 @@ class App(tk.Tk):
         self.protocol("WM_DELETE_WINDOW", self.close)
         self.title('EroLibrary')
         self.geometry('1080x500')
-        self.ero_id = 1
+        self.ero_id = 0
         self.ero_img_name = tk.StringVar()
         self.ero_path_name = tk.StringVar()
         self.ero_character = tk.StringVar()
@@ -58,7 +68,8 @@ class App(tk.Tk):
         self.ero_hair = tk.StringVar()
         self.ero_tags = tk.StringVar()
         self.ero_ero = tk.IntVar()
-        self.ero_list = ["1"]
+        self.ero_list = ["None"]
+        self.max = 99999
 
         self.db_name = tk.StringVar()
         self.FileDirName = tk.StringVar()  # 文字变量储存
@@ -74,37 +85,20 @@ class App(tk.Tk):
         self.tasks.append(app_loop.create_task(self.updater(interval)))
 
     async def sqlite_link(self):
-        print("输入数据库名字（非根目录下需输入完整路径）")
-        sqlite_host = input()
-        print("输入图片文件夹路径（绝对路径）")
-        img_path = input()
-        print(f"数据库：{sqlite_host}\n文件夹：{img_path}")
+        await engine.create_all()
         self.db_name.set(f"{sqlite_host}")
         self.FileDirName.set(f"{img_path}")
-        global engine, Base
-        engine = AsyncORM(f"sqlite+aiosqlite:///{sqlite_host}")
-        Base = engine.Base
-        await engine.create_all()
+        # Base = engine.Base
+        # await engine.create_all()
         # self.img_png = f"{self.FileDirName.get() + os.sep + os.listdir(self.FileDirName.get())[0]}"
         # print(f"{self.img_png}")
 
     async def Batch_write(self):
         await engine.create_all()
 
-        class ImageInformation(Base):
-            __table_args__ = {'extend_existing': True}
-            __tablename__ = "image_information"
-            id = Column(Integer, primary_key=True, autoincrement=True)
-            img_name = Column(String(32))
-            path_name = Column(String(32))
-            character = Column(String(32))
-            title = Column(String(32))
-            hair = Column(String(32))
-            tags = Column(String(32))
-            ero = Column(Integer)
-
         async def add_sqlite(table, img_name, path_name, character, title, hair, tags, ero):
-            print(f"{img_name}")
+            # print(f"{img_name}")
+            logger.success(f"{img_name}")
             # user_obj = table(img_name=img_name, character=character, work_name=work_name,tags=tags,ero=ero)
             # orm.add(table, user_obj)
             await engine.insert_or_ignore(table, ([ImageInformation.img_name == f"{img_name}"]),
@@ -171,10 +165,14 @@ class App(tk.Tk):
         global combo
         combo = ttk.Combobox(ero_out_frame, values=self.ero_list, width=17)
         combo.grid(row=8, column=1)
-        tk.Button(ero_out_frame, text="确认选择", command=lambda: app_loop.create_task(self.update_info())).grid(row=8, column=2)
-        tk.Button(ero_out_frame, text="上一张", width=10).grid(row=9, column=0)
-        tk.Button(ero_out_frame, text="下一张", width=10).grid(row=9, column=1)
-        tk.Button(ero_out_frame, text="写入修改").grid(row=10, column=1)
+        tk.Button(ero_out_frame, text="确认选择", command=lambda: app_loop.create_task(self.choose_combo())) \
+            .grid(row=8, column=2)
+        tk.Button(ero_out_frame, text="上一张", command=lambda: app_loop.create_task(self.before_ero()), width=10) \
+            .grid(row=9, column=0)
+        tk.Button(ero_out_frame, text="下一张", command=lambda: app_loop.create_task(self.next_ero()), width=10) \
+            .grid(row=9, column=1)
+        tk.Button(ero_out_frame, text="写入修改", command=lambda: app_loop.create_task(self.update_sql()))\
+            .grid(row=10, column=1)
 
     async def gui_show(self, app_loop):
         # ero_show_frame 显示所选图片
@@ -182,34 +180,16 @@ class App(tk.Tk):
         ero_show_frame.pack(side="left")
         tk.Label(ero_show_frame, text="显示所选图片").grid(row=0, column=1)
         global ero_show
-        # global img_png
-        # img_png = r"D:\automata-toolbox\test_img\00101.jpg"
-        # img_open = Image.open(self.img_png).resize((480, 268))
-        # img_open_pil = ImageTk.PhotoImage(img_open)
-        # self.img_open = Image.open(self.img_png).resize((480, 268))
-        # self.img_open_pil = ImageTk.PhotoImage(self.img_open)
         ero_show = tk.Label(ero_show_frame, image=self.img_open_pil)
-        print(f"{self.img_png}")
+        # print(f"{self.img_png}")
+        logger.success(f"当前图片：{self.img_png}")
         ero_show.grid(row=1, column=1)
 
-    async def update_info(self):
-        class ImageInformation(Base):
-            __table_args__ = {'extend_existing': True}
-            __tablename__ = "image_information"
-            id = Column(Integer, primary_key=True, autoincrement=True)
-            img_name = Column(String(32))
-            path_name = Column(String(32))
-            character = Column(String(32))
-            title = Column(String(32))
-            hair = Column(String(32))
-            tags = Column(String(32))
-            ero = Column(Integer)
-        # ero_show.configure(image=self.img_open_pil)
-        print(f"{self.img_png}")
+    async def update_info(self, res):
+        # print(f"{self.img_png}")
         # 刷新信息
-        self.ero_img_name.set(combo.get())
-        res = await get_info(ImageInformation.img_name == self.ero_img_name.get())
         self.ero_id = res[0][0]
+        self.ero_img_name.set(res[0][1])
         self.ero_path_name.set(res[0][2])
         self.ero_character.set(res[0][3])
         self.ero_title.set(res[0][4])
@@ -225,6 +205,7 @@ class App(tk.Tk):
         ero_out_ero.config(textvariable=self.ero_ero)
         # 刷新图片
         self.img_png = f"{os.path.join(self.FileDirName.get(), self.ero_img_name.get())}"
+        logger.success(f"当前图片：{self.img_png}")
         self.img_open = Image.open(self.img_png)
         width, height = self.img_open.size
         self.img_open = self.img_open.resize((int(width / 4), int(height / 4)))
@@ -233,35 +214,62 @@ class App(tk.Tk):
         ero_show.image = self.img_open_pil
         self.update_idletasks()  # 更新后必须update
 
-    # [(1, '00101.jpg', 'ero', 'none', 'none', 'none', 'none', 5), (2, '040.jpg', 'ero', 'none', 'none', 'none',
-    # 'none', 5), (3, '041.jpg', 'ero', 'none', 'none', 'none', 'none', 5), (4, '044.jpg', 'ero', 'none', 'non e',
-    # 'none', 'none', 5), (5, '047.jpg', 'ero', 'none', 'none', 'none', 'none', 5)]
-
     async def get_ero_name_list(self):
-        class ImageInformation(Base):
-            __table_args__ = {'extend_existing': True}
-            __tablename__ = "image_information"
-            id = Column(Integer, primary_key=True, autoincrement=True)
-            img_name = Column(String(32))
-            path_name = Column(String(32))
-            character = Column(String(32))
-            title = Column(String(32))
-            hair = Column(String(32))
-            tags = Column(String(32))
-            ero = Column(Integer)
-
         res = await get_info(ImageInformation.id > 0)
-        # if self.ero_id >= 100:
-        #     res = await get_info(and_(ImageInformation.id > (self.ero_id - 100), ImageInformation.id < self.ero_id + 100))
-        # else:
-        #     res = await get_info(and_(ImageInformation.id > 0, ImageInformation.id < self.ero_id + 100))
-        ans = [str]
+        # if self.ero_id >= 100: res = await get_info(and_(ImageInformation.id > (self.ero_id - 100),
+        # ImageInformation.id < self.ero_id + 100)) else: res = await get_info(and_(ImageInformation.id > 0,
+        # ImageInformation.id < self.ero_id + 100))
+        self.max = (await engine.query(func.max(ImageInformation.id)))[0]
+        logger.debug(f"id最大值为{self.max}")
+
+        ans = []
         for i in range(len(res)):
             ans.append(res[i][1])
         self.ero_list = ans
         combo.config(values=self.ero_list)
         combo.values = self.ero_list
+        logger.success(f"从{self.db_name.get()}中读取到数据")
         self.update_idletasks()
+
+    async def update_sql(self):
+        name = ero_out_name.get()
+        character = ero_out_character.get()
+        title = ero_out_title.get()
+        hair = ero_out_hair.get()
+        tags = ero_out_tags.get()
+        ero = ero_out_ero.get()
+        await engine.update(ImageInformation, ([ImageInformation.id == self.ero_id,
+                                                ImageInformation.img_name == f"{name}"]),
+                            {"character": character,
+                             "title": title,
+                             "hair": hair,
+                             "tags": tags,
+                             "ero": ero})
+        logger.success(f"成功写入信息\n‘‘character’: {character},\n‘title’: {title},\n‘hair’: {hair},"
+                       f"‘tags’: {tags},\n "
+                       f"‘ero’: {ero}")
+    # "img_name": name
+
+    async def choose_combo(self):
+        self.ero_img_name.set(combo.get())
+        res = await get_info(ImageInformation.img_name == self.ero_img_name.get())
+        await self.update_info(res)
+
+    async def next_ero(self):
+        if self.ero_id < self.max:
+            self.ero_id += 1
+            res = await get_info(ImageInformation.id == self.ero_id)
+            await self.update_info(res)
+        else:
+            logger.debug(f"下面没有了哟")
+
+    async def before_ero(self):
+        if self.ero_id > 1:
+            self.ero_id -= 1
+            res = await get_info(ImageInformation.id == self.ero_id)
+            await self.update_info(res)
+        else:
+            logger.debug(f"已经到头了哟")
 
     async def updater(self, interval):
         while True:
@@ -273,6 +281,7 @@ class App(tk.Tk):
             task.cancel()
         self.loop.stop()
         self.destroy()
+
 
 loop = asyncio.get_event_loop()
 app = App(loop)
