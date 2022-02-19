@@ -63,12 +63,19 @@ class App(tk.Tk):
         self.geometry('1080x500')
         self.ero_id = 0
         self.ero_img_name = tk.StringVar()
+        self.ero_img_name_list = []
         self.ero_path_name = tk.StringVar()
+        self.ero_path_name_list = []
         self.ero_character = tk.StringVar()
+        self.ero_character_list = []
         self.ero_title = tk.StringVar()
+        self.ero_title_list = []
         self.ero_hair = tk.StringVar()
+        self.ero_hair_list = []
         self.ero_tags = tk.StringVar()
+        self.ero_tags_list = []
         self.ero_ero = tk.IntVar()
+        self.ero_ero_list = []
         self.ero_list = ["None"]
         self.max = 99999
 
@@ -150,19 +157,19 @@ class App(tk.Tk):
         ero_out_path = tk.Entry(ero_out_frame, textvariable=self.ero_path_name, state=tk.DISABLED)
         ero_out_path.grid(row=2, column=1)
         tk.Label(ero_out_frame, text="图片中的角色：").grid(row=3, column=0)
-        ero_out_character = tk.Entry(ero_out_frame, textvariable=self.ero_character)
+        ero_out_character = ttk.Combobox(ero_out_frame, textvariable=self.ero_character)
         ero_out_character.grid(row=3, column=1)
         tk.Label(ero_out_frame, text="角色来源作品名：").grid(row=4, column=0)
-        ero_out_title = tk.Entry(ero_out_frame, textvariable=self.ero_title)
+        ero_out_title = ttk.Combobox(ero_out_frame, textvariable=self.ero_title)
         ero_out_title.grid(row=4, column=1)
         tk.Label(ero_out_frame, text="角色头发：").grid(row=5, column=0)
-        ero_out_hair = tk.Entry(ero_out_frame, textvariable=self.ero_hair)
+        ero_out_hair = ttk.Combobox(ero_out_frame, textvariable=self.ero_hair)
         ero_out_hair.grid(row=5, column=1)
         tk.Label(ero_out_frame, text="其他图片标签：").grid(row=6, column=0)
-        ero_out_tags = tk.Entry(ero_out_frame, textvariable=self.ero_tags)
+        ero_out_tags = ttk.Combobox(ero_out_frame, textvariable=self.ero_tags)
         ero_out_tags.grid(row=6, column=1)
         tk.Label(ero_out_frame, text="主观ero度：").grid(row=7, column=0)
-        ero_out_ero = tk.Entry(ero_out_frame, textvariable=self.ero_ero)
+        ero_out_ero = ttk.Combobox(ero_out_frame, textvariable=self.ero_ero)
         ero_out_ero.grid(row=7, column=1)
         tk.Label(ero_out_frame, text="选择图片：").grid(row=8, column=0)
         global combo
