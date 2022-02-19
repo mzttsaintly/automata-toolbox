@@ -56,6 +56,7 @@ class App(tk.Tk):
 
     def __init__(self, app_loop, interval=1 / 60):
         super(App, self).__init__()
+        self.dir = None
         self.loop = app_loop
         self.protocol("WM_DELETE_WINDOW", self.close)
         self.title('EroLibrary')
@@ -72,8 +73,8 @@ class App(tk.Tk):
         self.max = 99999
 
         self.db_name = tk.StringVar()
-        self.FileDirName = tk.StringVar()  # 文字变量储存
-        # self.img_png = r"D:\automata-toolbox\test_img\00101.jpg"
+        self.FileDirName = tk.StringVar()
+        
         self.img_png = f"{os.path.join(os.getcwd(), 'res', os.listdir(os.path.join(os.getcwd(), 'res'))[0])}"
         self.img_open = Image.open(self.img_png).resize((480, 268))
         self.img_open_pil = ImageTk.PhotoImage(self.img_open)
@@ -88,6 +89,8 @@ class App(tk.Tk):
         await engine.create_all()
         self.db_name.set(f"{sqlite_host}")
         self.FileDirName.set(f"{img_path}")
+        self.dir = self.FileDirName.get().split("\\")[-1]
+        logger.debug(f"dir = {self.dir}")
         # Base = engine.Base
         # await engine.create_all()
         # self.img_png = f"{self.FileDirName.get() + os.sep + os.listdir(self.FileDirName.get())[0]}"
@@ -111,7 +114,7 @@ class App(tk.Tk):
                                            "ero": ero})
 
         for file in os.listdir(self.FileDirName.get()):
-            await add_sqlite(ImageInformation, file, "ero", "none", "none", "none", "none", 5)
+            await add_sqlite(ImageInformation, file, self.dir, "none", "none", "none", "none", 5)
 
     async def gui_in(self, app_loop):
         # ero_in_frame 将图片导入数据库
