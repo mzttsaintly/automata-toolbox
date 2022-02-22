@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean, BLOB
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, BLOB, func
 from sqlalchemy import update, insert, delete
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
@@ -123,13 +123,21 @@ class AsyncORM(AsyncEngine):
         # today = datetime.date.today()
         # tomorrow = datetime.date.today() + datetime.timedelta(days=1)
         # res = await self.engine.load_all(select(table_and_column).where(search_equation))
-        res = (await self.execute(select(table_and_column).where(search_equation))).fetchall()
-        return res
+        return (await self.execute(select(table_and_column).where(search_equation))).fetchall()
 
-    async def query(self, condition):
+    async def query_one(self, condition):
         """获取一个符合条件的数据
         如：await engine.query(func.max(ImageInformation.id))"""
-        res = (await self.execute(select(condition))).fetchone()
+        return (await self.execute(select(condition))).fetchone()
+
+    async def query_count(self, condition):
+        return (await self.execute(select(func.count(condition)))).fetchone()[0]
+
+    async def select_distinct(self, table):
+        stack = (await self.execute(select(table).distinct())).fetchall()
+        res = []
+        for result in stack:
+            res.append(result[0])
         return res
 
 

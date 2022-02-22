@@ -63,9 +63,7 @@ class App(tk.Tk):
         self.geometry('1080x500')
         self.ero_id = 0
         self.ero_img_name = tk.StringVar()
-        self.ero_img_name_list = []
         self.ero_path_name = tk.StringVar()
-        self.ero_path_name_list = []
         self.ero_character = tk.StringVar()
         self.ero_character_list = []
         self.ero_title = tk.StringVar()
@@ -121,7 +119,7 @@ class App(tk.Tk):
                                            "ero": ero})
 
         for file in os.listdir(self.FileDirName.get()):
-            await add_sqlite(ImageInformation, file, self.dir, "none", "none", "none", "none", 5)
+            await add_sqlite(ImageInformation, file, self.dir, "Unknown", "Unknown", "Unknown", "Unknown", 5)
 
     async def gui_in(self, app_loop):
         # ero_in_frame 将图片导入数据库
@@ -157,19 +155,19 @@ class App(tk.Tk):
         ero_out_path = tk.Entry(ero_out_frame, textvariable=self.ero_path_name, state=tk.DISABLED)
         ero_out_path.grid(row=2, column=1)
         tk.Label(ero_out_frame, text="图片中的角色：").grid(row=3, column=0)
-        ero_out_character = ttk.Combobox(ero_out_frame, textvariable=self.ero_character)
+        ero_out_character = ttk.Combobox(ero_out_frame, textvariable=self.ero_character, values=self.ero_character_list)
         ero_out_character.grid(row=3, column=1)
         tk.Label(ero_out_frame, text="角色来源作品名：").grid(row=4, column=0)
-        ero_out_title = ttk.Combobox(ero_out_frame, textvariable=self.ero_title)
+        ero_out_title = ttk.Combobox(ero_out_frame, textvariable=self.ero_title, values=self.ero_title_list)
         ero_out_title.grid(row=4, column=1)
         tk.Label(ero_out_frame, text="角色头发：").grid(row=5, column=0)
-        ero_out_hair = ttk.Combobox(ero_out_frame, textvariable=self.ero_hair)
+        ero_out_hair = ttk.Combobox(ero_out_frame, textvariable=self.ero_hair, values=self.ero_hair_list)
         ero_out_hair.grid(row=5, column=1)
         tk.Label(ero_out_frame, text="其他图片标签：").grid(row=6, column=0)
-        ero_out_tags = ttk.Combobox(ero_out_frame, textvariable=self.ero_tags)
+        ero_out_tags = ttk.Combobox(ero_out_frame, textvariable=self.ero_tags, values=self.ero_tags_list)
         ero_out_tags.grid(row=6, column=1)
         tk.Label(ero_out_frame, text="主观ero度：").grid(row=7, column=0)
-        ero_out_ero = ttk.Combobox(ero_out_frame, textvariable=self.ero_ero)
+        ero_out_ero = ttk.Combobox(ero_out_frame, textvariable=self.ero_ero, values=self.ero_ero_list)
         ero_out_ero.grid(row=7, column=1)
         tk.Label(ero_out_frame, text="选择图片：").grid(row=8, column=0)
         global combo
@@ -226,11 +224,18 @@ class App(tk.Tk):
 
     async def get_ero_name_list(self):
         res = await get_info(ImageInformation.id > 0)
-        # if self.ero_id >= 100: res = await get_info(and_(ImageInformation.id > (self.ero_id - 100),
-        # ImageInformation.id < self.ero_id + 100)) else: res = await get_info(and_(ImageInformation.id > 0,
-        # ImageInformation.id < self.ero_id + 100))
-        self.max = (await engine.query(func.max(ImageInformation.id)))[0]
+        self.max = (await engine.query_one(func.max(ImageInformation.id)))[0]
         logger.debug(f"id最大值为{self.max}")
+        self.ero_character_list = await engine.select_distinct(ImageInformation.character)
+        self.ero_title_list = await engine.select_distinct(ImageInformation.title)
+        self.ero_hair_list = await engine.select_distinct(ImageInformation.hair)
+        self.ero_tags_list = await engine.select_distinct(ImageInformation.tags)
+        self.ero_ero_list = await engine.select_distinct(ImageInformation.ero)
+        ero_out_character.config(values=self.ero_character_list)
+        ero_out_title.config(values=self.ero_title_list)
+        ero_out_hair.config(values=self.ero_hair_list)
+        ero_out_tags.config(values=self.ero_hair_list)
+        ero_out_ero.config(values=self.ero_ero_list)
 
         ans = []
         for i in range(len(res)):
