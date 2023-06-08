@@ -130,3 +130,11 @@ dmypy.json
 
 ./res
 /res/
+/.idea/.gitignore
+/vue/1welcome.vue
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/inspectionProfiles/profiles_settings.xml
+/.idea/inspectionProfiles/Project_Default.xml
+/.idea/vcs.xml
+/.idea/automata-toolbox.iml
