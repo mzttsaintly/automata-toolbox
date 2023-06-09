@@ -1,4 +1,4 @@
-<script setup>
+<script setup>const img000 = '/pic/3swda/map/枫之舞 01 洛阳城郊.png'const img001 = '/pic/3swda/map/枫之舞 02 船屋.png'const img002 = '/pic/3swda/boss/image003.png'const img003 = '/pic/3swda/map/枫之舞 03 太室山、鬼谷.png'const img004 = '/pic/3swda/boss/image005.png'const img005 = '/pic/3swda/boss/image006.png'const img006 = '/pic/3swda/body/image007.png'const img007 = '/pic/3swda/map/枫之舞 04 新郑城郊、韩国兵营.png'const img008 = '/pic/3swda/map/枫之舞 05 殷商废墟全图.png'const img009 = '/pic/3swda/boss/image010.png'
 </script>
 
 <template>
@@ -6,8 +6,8 @@
         <h1>主线任务01:阴谋伊始</h1>
         <p>一开始的剧情后，我们会进入洛阳城郊，此时有几个支线任务可做。</p>
         <p class="tip">注意:机关人只能用“机关修复术”“铁石注生术”回复生命与体力，但是群体恢复道具以及“还魄丹”对机关人仍旧有效。</p>
-        <p><a href="/pic/3swda/map/枫之舞 01 洛阳城郊.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 01 洛阳城郊.png"></a></p>
+        <p><a href="img000">
+                <img border="0" src="img000"></a></p>
         <p class="nor"><b>◎支线任务:捉迷藏</b><br>
             触发地点:洛阳城郊，兰子<br>
             任务流程:与兰子对话→按图示找到所有的孩子→再次与兰子对话<br>
@@ -33,8 +33,8 @@
             触发地点:竹桥，钓叟<br>
             任务流程:与钓叟对话→给予巨蚯蚓<br>
             任务奖励:岩蚁（紫色）</p>
-        <p><a href="/pic/3swda/map/枫之舞 02 船屋.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 02 船屋.png"></a></p>
+        <p><a href="img001">
+                <img border="0" src="img001"></a></p>
         <p>完成支线后继续前进，到船屋触发剧情并进入大堂与公输班对话后，搜集物品进入机关密道。</p>
         <p class="tip">提示:木人兵攻击力较强，注意回复，若有压力可在原野练级至辅子彻学会初阳温火符，练出符咒后机关人可用，对木人兵伤害巨大。</p>
         <p class="nor"><b>◎支线任务:修复机关人</b><br>
@@ -46,24 +46,24 @@
             2.给机关人装备巨鼠旺福再向痴木复命，可增强机关人属性并避免一场战斗。<br>
             到达尽头后触发剧情，机关人与鲁班将军号开战。</p>
         <h2>◎BOSS:鲁班将军号</h2>
-        <p><a href="/pic/3swda/boss/image003.png">
-                <img border="0" src="/pic/3swda/boss/image003.png"></a></p>
+        <p><a href="img002">
+                <img border="0" src="img002"></a></p>
         <p class="tip">说明:本战难度较大，建议预先炼一张初阳温火符给机关人使用。开战前机关人会完全恢复，并且此战失败可以继续剧情。</p>
         <p>战后辅子彻说明来意，公输班让辅子彻前往东南方的少室山找鬼谷子。</p>
     </div>
     <div class="main">
         <h1>主线任务02:初遇佳人</h1>
         <p>进入少室山后，触发剧情，往西边走调查棺材，触发剧情，桑纹锦入队。继续上山，途中注意收集物品。（桑纹锦很脆弱，可先在大地图练级）</p>
-        <p><a href="/pic/3swda/map/枫之舞 03 太室山、鬼谷.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 03 太室山、鬼谷.png"></a></p>
+        <p><a href="img003">
+                <img border="0" src="img003"></a></p>
         <p>到达雪屋后，进入大堂右方房间，触发剧情，回大堂与鬼谷子对话，询问相关事宜后进入木人巷挑战草枢。调查陶人会进入战斗，战斗胜利后机关墙会移动至你调查的地方，复位开关可以使全部机关墙复位，但调查之前战胜的陶人无需再次战斗即可移动机关墙。调查草枢后进入BOSS战。
         </p>
         <p class="tip">与大甲子对话可免费回复，无需节省灵力体力。</p>
         <h2>◎BOSS:草枢机关阵</h2>
-        <p><a href="/pic/3swda/boss/image005.png">
-                <img border="0" src="/pic/3swda/boss/image005.png"></a></p>
-        <p><a href="/pic/3swda/boss/image006.png">
-                <img border="0" src="/pic/3swda/boss/image006.png"></a></p>
+        <p><a href="img004">
+                <img border="0" src="img004"></a></p>
+        <p><a href="img005">
+                <img border="0" src="img005"></a></p>
         <p class="tip">说明:本战难度较大，建议练级至桑纹锦学会气还咒后再来挑战。当草枢机关阵闭合后只承受普通攻击伤害（法术，武技全部无效），并且下一回合必定使用武技“残影击”（群体攻击），注意回复。</p>
         <p>战胜后机关人学会“残影击”，回鬼谷子处复命，孙宾加入队伍（不参战），前往洛阳城郊右方的碉堡。</p>
         <p class="nor"><b>◎支线任务:贾鲁河的鬼魅其一</b><br>
@@ -75,14 +75,14 @@
             任务流程:前往贾鲁河桥南方的贾鲁河源头→来到图示位置自动触发战斗<br>
             任务奖励:捏面人<br>
             注意事项:只有孙宾在队伍时才可触发</p>
-        <p><a href="/pic/3swda/body/image007.png">
-                <img border="0" src="/pic/3swda/body/image007.png"></a></p>
+        <p><a href="img006">
+                <img border="0" src="img006"></a></p>
     </div>
     <div class="main">
         <h1>主线任务03:机关军团</h1>
         <p>在碉堡里，孙宾出示周天子的令牌，一行人得以来到韩国。通过关卡后往东南方进入新郑，这里有一些支线任务。</p>
-        <p><a href="/pic/3swda/map/枫之舞 04 新郑城郊、韩国兵营.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 04 新郑城郊、韩国兵营.png"></a></p>
+        <p><a href="img007">
+                <img border="0" src="img007"></a></p>
         <p class="nor"><b>◎支线任务:猜谜</b><br>
             触发地点:新郑城郊，舞枪艺人北方小孩<br>
             任务流程:与小孩对话→选择“是”并交出300钱→根据提示找到六样物品后与小孩对话<br>
@@ -109,8 +109,8 @@
             任务流程:与陈成对话<br>
             任务奖励:开启新郑地区寄存功能</p>
         <p>到新郑城郊下方军营，触发剧情，前往军营东方的殷商废墟。</p>
-        <p><a href="/pic/3swda/map/枫之舞 05 殷商废墟全图.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 05 殷商废墟全图.png"></a></p>
+        <p><a href="img008">
+                <img border="0" src="img008"></a></p>
         <p class="nor"><b>◎支线任务:亡魂的执念其一</b><br>
             触发地点:殷商废墟地道一层，骷髅<br>
             任务流程:与骷髅对话→给予“陀螺”<br>
@@ -132,8 +132,8 @@
             注意事项:只有孙宾在队伍时才可触发</p>
         <p>只有取得避火珠后才能进入殷商废墟地道，在第三层与挡住去路的机关人将军对话，在前方的香炉处存档。进入第四层，触发剧情，孙宾离队，全员完全恢复，进入BOSS战。</p>
         <h2>◎BOSS:疾鹏</h2>
-        <p><a href="/pic/3swda/boss/image010.png">
-                <img border="0" src="/pic/3swda/boss/image010.png"></a></p>
+        <p><a href="img009">
+                <img border="0" src="img009"></a></p>
         <p class="tip">说明:本战难度一般，疾鹏电爪和疾电符威力较大，注意回复。疾鹏会透骨正气符，建议不要节省灵力法术攻击速战速决。</p>
         <p>战后继续剧情，疾鹏入队（不参战），辅子彻学会“疾鹏电爪”。回军营韩虔将军处复命，触发剧情，一行人来到树林内，寻找绑架贵族的逃兵集团。</p>
     </div>

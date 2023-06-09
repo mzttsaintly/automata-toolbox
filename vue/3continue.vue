@@ -1,50 +1,50 @@
-<script setup>
+<script setup>const img000 = '/pic/3swda/map/枫之舞 06 森林、逃兵洞穴.png'const img001 = '/pic/3swda/boss/image012.png'const img002 = '/pic/3swda/boss/image013.png'const img003 = '/pic/3swda/boss/image014.png'const img004 = '/pic/3swda/map/枫之舞 07 长葛镇.png'const img005 = '/pic/3swda/map/枫之舞 08 长葛地下城.png'const img006 = '/pic/3swda/boss/image017.png'const img007 = '/pic/3swda/boss/image018.png'const img008 = '/pic/3swda/boss/image019.png'const img009 = '/pic/3swda/map/枫之舞 10 墨者居所.png'
 </script>
 
 <template>
     <div class="main">
         <h1>主线任务04:庶人帮主</h1>
-        <p><a href="/pic/3swda/map/枫之舞 06 森林、逃兵洞穴.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 06 森林、逃兵洞穴.png"></a></p>
+        <p><a href="img000">
+                <img border="0" src="img000"></a></p>
         <p>来到洞穴前，触发剧情战（逃兵X3），战后会完全恢复。先到贵族所在地，触发剧情战（逃兵，逃兵X3），与贵族对话后前往铸石子所在地触发BOSS战。</p>
         <p class="tip">和洞口外的庶人帮帮众对话可恢复体力仙术。</p>
         <h2>◎BOSS:木甲兽</h2>
-        <p><a href="/pic/3swda/boss/image012.png">
-                <img border="0" src="/pic/3swda/boss/image012.png"></a></p>
+        <p><a href="img001">
+                <img border="0" src="img001"></a></p>
         <p class="tip">说明:本战难度一般，木甲兽怕火，建议辅子彻用火珠咒攻击。木甲兽的千步矢威力较大，注意回复。</p>
         <p>战后逃兵团逃入洞穴深处，铸石子决定一举歼灭他们，辅子彻一行人也跟随铸石子前往洞穴深处。在香炉处存档后，继续前进触发剧情，铸石子入队，全员完全恢复并进入BOSS战。</p>
         <h2>◎BOSS:逃兵头目</h2>
-        <p><a href="/pic/3swda/boss/image013.png">
-                <img border="0" src="/pic/3swda/boss/image013.png"></a></p>
+        <p><a href="img002">
+                <img border="0" src="img002"></a></p>
         <p>战后逃兵头目召集所有逃兵进行融合，铸石子帮助大家完全恢复后，进行第二场BOSS战。</p>
         <h2>◎BOSS:妖化逃兵团</h2>
-        <p><a href="/pic/3swda/boss/image014.png">
-                <img border="0" src="/pic/3swda/boss/image014.png"></a></p>
+        <p><a href="img003">
+                <img border="0" src="img003"></a></p>
         <p class="tip">说明:本战难度较大，妖化逃兵团会使用风沙甘霖符，注意回复，速战速决。</p>
         <p>战后铸石子向辅子彻询问了一些情况，决定帮助辅子彻阻止蜀桑子的阴谋。出洞穴发生剧情，从南边离开树林，往东南方向进入长葛镇。</p>
     </div>
     <div class="main">
         <h1>主线任务05:地下危机</h1>
-        <p><a href="/pic/3swda/map/枫之舞 07 长葛镇.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 07 长葛镇.png"></a></p>
+        <p><a href="img004">
+                <img border="0" src="img004"></a></p>
         <p class="imp"><b>◎支线任务:阿鲍的收藏其一</b><br>
             触发地点:长葛镇民房，阿鲍<br>
             任务流程:与阿鲍对话→给予“英招”“树精”“吸血蝙蝠”“巨蚯蚓”“毒蜂”“鬼卒”<br>
             任务奖励:龙鳞（绿色）<br>
             注意事项:须在到达许昌前完成</p>
         <p>与桥边流浪汉对话触发剧情，桑纹锦离队，辅子彻一行人进入长葛地下城。</p>
-        <p><a href="/pic/3swda/map/枫之舞 08 长葛地下城.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 08 长葛地下城.png"></a></p>
+        <p><a href="img005">
+                <img border="0" src="img005"></a></p>
         <p>进入地下城药铺触发剧情，地下城被蜀桑子封锁，疾鹏离队（疾鹏离队期间辅子彻无法使用疾鹏电爪），桑纹锦与庞涓前往大梁向墨子求救，辅子彻为自救在地下城寻找红色宝石。</p>
         <p>进入地下城二层触发机关，进入BOSS战。</p>
         <h2>◎BOSS:天象石</h2>
-        <p><a href="/pic/3swda/boss/image017.png">
-                <img border="0" src="/pic/3swda/boss/image017.png"></a></p>
+        <p><a href="img006">
+                <img border="0" src="img006"></a></p>
         <p class="tip">说明:天象石有四种状态:日（会聚火符和流岩火雨符），月（会聚云符和凝血冰雨符），云（会疾电符），星（只承受普通攻击，法术与武技无效）。</p>
         <p>按顺序触发机关，来到棺材处，调查棺材触发BOSS战。</p>
         <h2>◎BOSS:守棺机关阵</h2>
-        <p><a href="/pic/3swda/boss/image018.png">
-                <img border="0" src="/pic/3swda/boss/image018.png"></a></p>
+        <p><a href="img007">
+                <img border="0" src="img007"></a></p>
         <p class="tip">说明:守棺机关阵与天象石一样有日月云星四种状态。</p>
         <p>战胜后安策逃出，辅子彻调查棺材后开启暗室机关，众人在暗室里发现了西域红石。回通风口复命，触发剧情，机关人学会“乾天太红”。</p>
         <p class="tip">小纸条:如果在复命途中你与安策对话并选择“是”，那么你会看到一出好戏。</p>
@@ -62,11 +62,11 @@
         <p>辅子彻一行人准备前往魏国寻找桑纹锦，在这之前需要找韩虔将军询问通过关卡的口令。得到口令后，通过新郑东方的关卡来到韩国。向左走到达驻军地，碰到孙宾。进入山洞与孙宾了解情况后，继续向北，发现魏国军营后回孙宾处询问情况，触发剧情，全员完全回复并进入BOSS战。
         </p>
         <h2>◎BOSS:魏国大将</h2>
-        <p><a href="/pic/3swda/boss/image019.png">
-                <img border="0" src="/pic/3swda/boss/image019.png"></a></p>
+        <p><a href="img008">
+                <img border="0" src="img008"></a></p>
         <p>战后辅子彻一行人得知桑纹锦被庞涓送给魏国将军李勤，愤怒的辅子彻急忙前往大梁。在此之前，先回一趟大梁东方的墨者居所，铸石子离队</p>
-        <p><a href="/pic/3swda/map/枫之舞 10 墨者居所.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 10 墨者居所.png"></a></p>
+        <p><a href="img009">
+                <img border="0" src="img009"></a></p>
         <p class="tip">小纸条:诸如“木雕棋子”“禁魔雕像”之类的物品不推荐保存，他们不是炼妖的好材料，拿去卖几个钱吧。不过“人发”“人骨”“火种”“泥堆”这几类物品能较轻松地炼化出高级的护驾，推荐保存。</p>
         <p>回到西南方辅子彻的房间，触发剧情，机关人离队。离开墨者居所前往大梁客栈寻找铸石子。</p>
         <p class="imp"><b>◎支线任务:墨家的支援其二</b><br>

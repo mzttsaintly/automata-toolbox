@@ -1,28 +1,28 @@
-<script setup>
+<script setup>const img000 = '/pic/3swda/map/枫之舞 18 天政.png'const img001 = '/pic/3swda/map/枫之舞 19 鬼神之塔.png'const img002 = '/pic/3swda/map/枫之舞 20 天外天.png'const img003 = '/pic/3swda/boss/image038.png'const img004 = '/pic/3swda/map/枫之舞 22 墓穴.png'const img005 = '/pic/3swda/boss/image040.png'const img006 = '/pic/3swda/boss/image041.png'const img007 = '/pic/3swda/map/枫之舞 21 鬼神之塔下.png'const img008 = '/pic/3swda/boss/image042.png'const img009 = '/pic/3swda/map/枫之舞 23 机关龙.png'const img010 = '/pic/3swda/boss/image044.png'
 </script>
 
 <template>
     <div class="main">
         <h1>主线任务10:天地异变</h1>
-        <p><a href="/pic/3swda/map/枫之舞 18 天政.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 18 天政.png"></a></p>
+        <p><a href="img000">
+                <img border="0" src="img000"></a></p>
         <p>一直前进至终点，触发剧情，蜀桑子将自己创造的妖魔放出，众人决定先回许昌客栈。回到客栈后，从田衍处得知安策震怒，一行人赶往享天。付完过路税，到达享天后触发剧情战（木甲兽），之后辅子彻一行人奉命前往鬼神之塔。到达鬼神之塔后，炼制一张疾电符给雷神即可进入鬼神之塔。
         </p>
         <p class="tip">小纸条:似乎仙灵都喜欢疾电符，不管是蝶仙也好雷神也好，疾电符简直就是通用的货币一样。。。</p>
-        <p><a href="/pic/3swda/map/枫之舞 19 鬼神之塔.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 19 鬼神之塔.png"></a></p>
+        <p><a href="img001">
+                <img border="0" src="img001"></a></p>
         <p>鬼神之塔二楼是卖物品的地方，不过若想买武器需要与雷神打一场。鬼神之塔三楼可以选择硬闯钱奴的房间听到鬼神之塔下的事情，鬼神之塔四楼可以花10100钱（100钱用来买情报）获得法宝大嘴牛，但是这个法宝完全成长后得到的无形剑没有任何作用，不推荐购买。来到顶层与塔主对话后通过传送阵来到天外天。
         </p>
-        <p><a href="/pic/3swda/map/枫之舞 20 天外天.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 20 天外天.png"></a></p>
+        <p><a href="img002">
+                <img border="0" src="img002"></a></p>
         <p class="nor"><b>◎支线任务:嫦娥</b><br>
             触发地点:天外天，嫦娥<br>
             任务流程:与嫦娥对话→选择“是”并击败嫦娥<br>
             任务奖励:嫦娥（不能炼化不能寄存，但她的风砂甘霖符是比较实用的技能）</p>
         <p>来到顶层调查仙炉，触发BOSS战。</p>
         <h2>◎BOSS:晴女+风爷+雷君</h2>
-        <p><a href="/pic/3swda/boss/image038.png">
-                <img border="0" src="/pic/3swda/boss/image038.png"></a></p>
+        <p><a href="img003">
+                <img border="0" src="img003"></a></p>
         <p class="tip">说明:本战难度一般，建议逐个击破。注意选择目标顺序与敌人排序不一样！（另提晴女的样子跟天之痕的蜃气精真是一模一样。）</p>
         <p>战后得到幻雾香炉（随时存档），回到塔主处，得知须到鬼神之塔下找一位囚犯才能使附近恢复原貌。（此后可花10000钱买香炉）</p>
     </div>
@@ -30,18 +30,18 @@
         <h1>主线任务11:心魔地狱</h1>
         <p>来到鬼神之塔下，与天毒尊者对话触发剧情，继续往下走，触发剧情，铸石子离队，进入墓穴。</p>
         <p class="tip">小纸条:每进入一次鬼神之塔下，都可以接近棺材内的骷髅，有彩蛋哦！数次触发后辅子彻会忍无可忍，然而并没有什么作用。</p>
-        <p><a href="/pic/3swda/map/枫之舞 22 墓穴.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 22 墓穴.png"></a></p>
+        <p><a href="img004">
+                <img border="0" src="img004"></a></p>
         <p>按照图示顺序触发剧情，在香炉处存档可完全恢复，之后触发BOSS战。</p>
         <h2>◎BOSS:天毒尊者</h2>
-        <p><a href="/pic/3swda/boss/image040.png">
-                <img border="0" src="/pic/3swda/boss/image040.png"></a></p>
-        <p><a href="/pic/3swda/boss/image041.png">
-                <img border="0" src="/pic/3swda/boss/image041.png"></a></p>
+        <p><a href="img005">
+                <img border="0" src="img005"></a></p>
+        <p><a href="img006">
+                <img border="0" src="img006"></a></p>
         <p class="tip">说明:打败天毒尊者人形后，天毒尊者会变成蛛形，这之后他会使用护魔心法（一定回合数内武技与仙术无效）与千手穿心（群体攻击）。</p>
         <p>战斗胜利后铸石子走出心魔，墓穴消失，此时调查房间内之前铸石子被吸入的正中央的石像会进入DOMO工作室。</p>
-        <p><a href="/pic/3swda/map/枫之舞 21 鬼神之塔下.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 21 鬼神之塔下.png"></a></p>
+        <p><a href="img007">
+                <img border="0" src="img007"></a></p>
         <p class="imp"><b>◎DOMO任务:苏竑嶂</b><br>
             触发地点:DOMO工作室，苏竑嶂<br>
             任务流程:与苏竑嶂对话<br>
@@ -63,14 +63,14 @@
             任务流程:与陈志弘对话<br>
             任务奖励:铁管子（不消耗的投掷武器）</p>
         <p>往下走会碰到一个封印壁画，进入战斗，封印壁画不会攻击，平砍即可。</p>
-        <p><a href="/pic/3swda/boss/image042.png">
-                <img border="0" src="/pic/3swda/boss/image042.png"></a></p>
+        <p><a href="img008">
+                <img border="0" src="img008"></a></p>
         <p>进入太古封神室，触发剧情，蜀桑子将轩辕剑夺走。调查头颅触发剧情，壶中仙头入队（不参战）。回许昌客栈与鬼谷子对话，触发剧情。辅子彻一行人进入机关龙。（自此不能离开迷宫）</p>
     </div>
     <div class="main">
         <h1>主线任务12:雄心歧路</h1>
-        <p><a href="/pic/3swda/map/枫之舞 23 机关龙.png">
-                <img border="0" src="/pic/3swda/map/枫之舞 23 机关龙.png"></a></p>
+        <p><a href="img009">
+                <img border="0" src="img009"></a></p>
         <p class="nor"><b>◎支线任务:以毒攻毒</b><br>
             触发地点:机关龙宝箱<br>
             任务流程:调查宝箱→给予夸父五只赤兽<br>
@@ -88,8 +88,8 @@
             注意事项:盘古之斧是铸石子的最强武器</p>
         <p>来到机关龙核心，触发剧情，壶中仙取得炼妖壶，将世界变回原状，蜀桑子大怒，决定对众人下杀手。</p>
         <h2>◎BOSS:蜀桑子</h2>
-        <p><a href="/pic/3swda/boss/image044.png">
-                <img border="0" src="/pic/3swda/boss/image044.png"></a></p>
+        <p><a href="img010">
+                <img border="0" src="img010"></a></p>
         <p>战后进入大结局。</p>
     </div>
 </template>

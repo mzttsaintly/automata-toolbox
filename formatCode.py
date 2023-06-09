@@ -22,18 +22,20 @@ def get_src(file):
         # new_res = make_obj(res_list)
         new_res_dict = make_obj_dict(res_list)
         new_res = dict_to_list(new_res_dict)
-        f.close()
+        # f.close()
         file_data = ""
         with open(file, 'r', encoding='utf-8') as rf:
             for line in rf:
                 for key, value in new_res_dict.items():
                     if value in line:
                         line = line.replace(value, key)
-                    file_data += line
+                file_data += line
         log.debug(file_data)
         with open(file, 'w', encoding='utf-8') as wf:
             wf.write(file_data)
 
+    with open(file, 'r', encoding='utf-8') as ft:
+        res = ft.read()
         content_add = "\r".join(new_res)
         # log.debug(content_add)
         pos = res.find('<script>')
